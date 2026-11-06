@@ -16,13 +16,7 @@ elevenlabs-convai {
 }
 </style>
 
-<style>
-/* PHILIPP_WIDGET_SCALE_V1 */
-elevenlabs-convai {
-    transform: scale(0.79, 0.40) !important;
-    transform-origin: bottom left !important;
-}
-</style>
+
 <elevenlabs-convai agent-id="agent_4501m6r5yre0f1r88pmrmvbj8dca"></elevenlabs-convai>
 <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
 
@@ -60,6 +54,41 @@ elevenlabs-convai {
   applyFontSize();
 
   setTimeout(() => observer.disconnect(), 15000);
+})();
+</script>
+
+
+<script>
+/* PHILIPP_WIDGET_COLLAPSED_FIX_V1 */
+(() => {
+  const STYLE_ID = "philipp-collapsed-widget-fix";
+
+  function update() {
+    const host = document.querySelector("elevenlabs-convai");
+    const root = host?.shadowRoot;
+    if (!root) return;
+
+    if (!root.getElementById(STYLE_ID)) {
+      const style = document.createElement("style");
+      style.id = STYLE_ID;
+      style.textContent = `
+        div.rounded-compact-pill {
+          transform: scale(1.35) !important;
+          transform-origin: bottom left !important;
+        }
+      `;
+      root.appendChild(style);
+    }
+  }
+
+  const observer = new MutationObserver(update);
+  observer.observe(document.documentElement, {
+    childList: true,
+    subtree: true
+  });
+
+  update();
+  window.addEventListener("load", update);
 })();
 </script>
 
